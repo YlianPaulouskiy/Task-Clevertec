@@ -10,12 +10,12 @@ public class Director {
         this.builder = builder;
     }
 
-    public Receipt buildReceipt(String source) {
+    public Receipt buildReceipt(String[] args) {
         builder.createReceipt();
-        builder.buildProducts(source);
-        builder.buildSale(source);
-        builder.buildTotal(source);
-        builder.buildTotal(source);
+        builder.buildProducts(args);
+        builder.buildSale(args);
+        builder.buildTotal(args);
+        builder.buildTotalWithSale(args);
         return builder.getReceipt();
     }
     

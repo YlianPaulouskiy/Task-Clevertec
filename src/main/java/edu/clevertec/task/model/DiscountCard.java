@@ -3,12 +3,8 @@ package edu.clevertec.task.model;
 import edu.clevertec.task.model.parent.BaseModel;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-//import lombok.Getter;
-//import lombok.Setter;
 
 @Entity
-//@Getter
-//@Setter
 public class DiscountCard extends BaseModel {
 
     @Column(nullable = false, unique = true)

@@ -22,28 +22,28 @@ public class ReceiptWithSale extends ReceiptBuilder {
     }
 
     @Override
-    void buildProducts(String source) {
-        receipt.setProducts(converter.getProducts(source));
+    void buildProducts(String[] args) {
+        receipt.setProducts(converter.getProducts(args));
     }
 
     @Override
-    void buildSale(String source) {
-        Integer cardNumber = converter.getDiscountCard(source);
+    void buildSale(String[] args) {
+        Integer cardNumber = converter.getDiscountCard(args);
         SalePriceCounter salePriceCounter = new SalePriceCounter(fullPriceCounter, cardNumber, cardRepository);
-        Double totalPrice = fullPriceCounter.getCost(converter.getProductIds(source));
-        Double salePrice = salePriceCounter.getCost(converter.getProductIds(source));
+        Double totalPrice = fullPriceCounter.getCost(converter.getProductIds(args));
+        Double salePrice = salePriceCounter.getCost(converter.getProductIds(args));
         receipt.setSale(totalPrice - salePrice);
     }
 
     @Override
-    void buildTotal(String source) {
-        receipt.setTotal(fullPriceCounter.getCost(converter.getProductIds(source)));
+    void buildTotal(String[] args) {
+        receipt.setTotal(fullPriceCounter.getCost(converter.getProductIds(args)));
     }
 
     @Override
-    void buildTotalWithSale(String source) {
-        Integer cardNumber = converter.getDiscountCard(source);
+    void buildTotalWithSale(String[] args) {
+        Integer cardNumber = converter.getDiscountCard(args);
         SalePriceCounter salePriceCounter = new SalePriceCounter(fullPriceCounter, cardNumber, cardRepository);
-        receipt.setTotalWithSale(salePriceCounter.getCost(converter.getProductIds(source)));
+        receipt.setTotalWithSale(salePriceCounter.getCost(converter.getProductIds(args)));
     }
 }

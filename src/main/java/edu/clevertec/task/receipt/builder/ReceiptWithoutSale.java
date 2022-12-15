@@ -22,22 +22,22 @@ public class ReceiptWithoutSale extends ReceiptBuilder {
 
 
     @Override
-    void buildProducts(String source) {
-        receipt.setProducts(converter.getProducts(source));
+    void buildProducts(String[] args) {
+        receipt.setProducts(converter.getProducts(args));
     }
 
     @Override
-    void buildSale(String source) {
+    void buildSale(String[] args) {
         receipt.setSale(null);
     }
 
     @Override
-    void buildTotal(String source) {
-        receipt.setTotal(fullPriceCounter.getCost(converter.getProductIds(source)));
+    void buildTotal(String[] args) {
+        receipt.setTotal(fullPriceCounter.getCost(converter.getProductIds(args)));
     }
 
     @Override
-    void buildTotalWithSale(String source) {
+    void buildTotalWithSale(String[] args) {
         receipt.setTotalWithSale(null);
     }
 }

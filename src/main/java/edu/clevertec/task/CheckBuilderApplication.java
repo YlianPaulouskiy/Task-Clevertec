@@ -1,5 +1,8 @@
 package edu.clevertec.task;
 
+import edu.clevertec.task.receipt.builder.Director;
+import edu.clevertec.task.receipt.builder.ReceiptWithSale;
+import edu.clevertec.task.receipt.builder.ReceiptWithoutSale;
 import edu.clevertec.task.receipt.lines.LineCheck;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
@@ -8,7 +11,21 @@ public class CheckBuilderApplication {
 
     public static void main(String[] args) {
 //        SpringApplication.run(CheckBuilderApplication.class, args);
-        System.out.println(LineCheck.isCorrectSource("3-4 card-1234"));
+        boolean useCard = false;
+
+        for (String arg : args) {
+            if (LineCheck.isCardSource(arg)) {
+                useCard = true;
+            }
+        }
+
+        if (useCard) {
+            new ReceiptWithSale();
+        } else {
+            new ReceiptWithoutSale();
+        }
+
+        Director director = new Director()
     }
 
 }
