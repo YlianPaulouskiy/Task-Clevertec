@@ -25,7 +25,7 @@ public class Converter {
             return products;
         } else {
             throw new IncorrectInputSourceException("Incorrect source\n" + source
-                    + "\nsource will be match regular expression:\n(\\d-\\d\\s*)+(card-\\d{4})?"  );
+                    + "\nsource will be match regular expression:\n(\\d-\\d\\s*)+(card-\\d{4})?");
         }
     }
 
@@ -40,10 +40,8 @@ public class Converter {
             return null;
         } else {
             throw new IncorrectInputSourceException("Incorrect source\n" + source
-                    + "\nsource will be match regular expression:\n(\\d-\\d\\s*)+(card-\\d{4})?"  );
+                    + "\nsource will be match regular expression:\n(\\d-\\d\\s*)+(card-\\d{4})?");
         }
     }
-
-
 
 }
