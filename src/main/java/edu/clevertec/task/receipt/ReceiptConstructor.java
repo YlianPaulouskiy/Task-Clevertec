@@ -9,7 +9,7 @@ import edu.clevertec.task.receipt.lines.LineCheck;
 
 public class ReceiptConstructor {
 
-    private void start(String[] args) {
+    public void start(String[] args) {
         Director director = new Director(getBuilder(isCard(args)));
         Receipt receipt = director.buildReceipt(args);
         System.out.println(receipt);
