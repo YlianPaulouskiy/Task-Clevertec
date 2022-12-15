@@ -6,12 +6,17 @@ import edu.clevertec.task.receipt.builder.ReceiptBuilder;
 import edu.clevertec.task.receipt.builder.ReceiptWithSale;
 import edu.clevertec.task.receipt.builder.ReceiptWithoutSale;
 import edu.clevertec.task.receipt.lines.LineCheck;
+import edu.clevertec.task.receipt.writer.ReceiptWriter;
 
 public class ReceiptConstructor {
 
     public void start(String[] args) {
         Director director = new Director(getBuilder(isCard(args)));
         Receipt receipt = director.buildReceipt(args);
+        // запись в файл
+        ReceiptWriter writer = new ReceiptWriter();
+        writer.save(receipt.toString());
+        //вывод в консоль
         System.out.println(receipt);
     }
 
