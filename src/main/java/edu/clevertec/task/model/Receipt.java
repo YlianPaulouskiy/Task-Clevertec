@@ -7,16 +7,16 @@ import java.util.Map;
 
 public class Receipt {
 
-    private Map<Long, Integer> products;
+    private Map<Product, Integer> products;
     private Double sale;
     private Double total;
     private Double totalWithSale;
 
-    public Map<Long, Integer> getProducts() {
+    public Map<Product, Integer> getProducts() {
         return products;
     }
 
-    public void setProducts(Map<Long, Integer> products) {
+    public void setProducts(Map<Product, Integer> products) {
         this.products = products;
     }
 

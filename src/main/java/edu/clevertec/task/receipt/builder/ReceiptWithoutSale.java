@@ -16,7 +16,7 @@ public class ReceiptWithoutSale extends ReceiptBuilder {
     private ProductRepository productRepository;
 
     public ReceiptWithoutSale() {
-        converter = new Converter();
+        converter = new Converter(productRepository);
         fullPriceCounter = new FullPriceCounter(productRepository);
     }
 
@@ -33,7 +33,7 @@ public class ReceiptWithoutSale extends ReceiptBuilder {
 
     @Override
     void buildTotal(String source) {
-        receipt.setTotal(fullPriceCounter.getCost(converter.getProducts(source)));
+        receipt.setTotal(fullPriceCounter.getCost(converter.getProductIds(source)));
     }
 
     @Override

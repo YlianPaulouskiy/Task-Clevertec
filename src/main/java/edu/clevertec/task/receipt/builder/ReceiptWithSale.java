@@ -17,7 +17,7 @@ public class ReceiptWithSale extends ReceiptBuilder {
     private ProductRepository productRepository;
 
     public ReceiptWithSale() {
-        converter = new Converter();
+        converter = new Converter(productRepository);
         fullPriceCounter = new FullPriceCounter(productRepository);
     }
 
@@ -30,20 +30,20 @@ public class ReceiptWithSale extends ReceiptBuilder {
     void buildSale(String source) {
         Integer cardNumber = converter.getDiscountCard(source);
         SalePriceCounter salePriceCounter = new SalePriceCounter(fullPriceCounter, cardNumber, cardRepository);
-        Double totalPrice = fullPriceCounter.getCost(converter.getProducts(source));
-        Double salePrice = salePriceCounter.getCost(converter.getProducts(source));
+        Double totalPrice = fullPriceCounter.getCost(converter.getProductIds(source));
+        Double salePrice = salePriceCounter.getCost(converter.getProductIds(source));
         receipt.setSale(totalPrice - salePrice);
     }
 
     @Override
     void buildTotal(String source) {
-        receipt.setTotal(fullPriceCounter.getCost(converter.getProducts(source)));
+        receipt.setTotal(fullPriceCounter.getCost(converter.getProductIds(source)));
     }
 
     @Override
     void buildTotalWithSale(String source) {
         Integer cardNumber = converter.getDiscountCard(source);
         SalePriceCounter salePriceCounter = new SalePriceCounter(fullPriceCounter, cardNumber, cardRepository);
-        receipt.setTotalWithSale(salePriceCounter.getCost(converter.getProducts(source)));
+        receipt.setTotalWithSale(salePriceCounter.getCost(converter.getProductIds(source)));
     }
 }
