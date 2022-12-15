@@ -1,8 +1,6 @@
 package edu.clevertec.task.model;
 
-import edu.clevertec.task.repository.ProductRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-
+import java.time.LocalDateTime;
 import java.util.Map;
 
 public class Receipt {
@@ -47,19 +45,27 @@ public class Receipt {
 
     @Override
     public String toString() {
-//        StringBuilder receipt = new StringBuilder();
-//
-//        receipt.append("Cash Receipt\n")
-//                .append("QTY\t").append("Description\t").append("Price\t").append("Sale Price\t").append("Total\n");
-//        for (Long id : products.keySet()) {
-//            receipt.append(products.get(id)).append("\t");
-//            receipt.append(productRepository.getReferenceById(id))
-//        }
-        return "Receipt{" +
-                "products=" + products +
-                ", sale=" + sale +
-                ", total=" + total +
-                ", totalWithSale=" + totalWithSale +
-                '}';
+        StringBuilder receipt = new StringBuilder();
+
+        receipt.append("Cash Receipt\n")
+                .append("Date:").append(LocalDateTime.now())
+                .append("Time:").append(LocalDateTime.now())
+                .append("QTY\t").append("Description\t").append("Price\t").append("Sale Price\t").append("Total\n");
+        for (Product product : products.keySet()) {
+            receipt.append(products.get(product)).append("\t")
+                    .append(product.getName()).append("\t")
+                    .append(product.getPrice()).append("\t")
+                    .append(products.get(product) > 5 ? product.getPrice() * 0.1 : "-").append("\t")
+                    .append(products.get(product) * product.getPrice()).append("\n");
+        }
+        receipt.append("--------------------------------------------------\n");
+        if (sale != null) {
+            receipt.append("Full price:\t\t\t").append(total).append("\n")
+                    .append("Sale:\t\t\t").append(sale).append("\n")
+                    .append("TOTAL:\t\t\t").append(totalWithSale);
+        } else {
+            receipt.append("TOTAL:\t\t\t").append(total);
+        }
+        return receipt.toString();
     }
 }
