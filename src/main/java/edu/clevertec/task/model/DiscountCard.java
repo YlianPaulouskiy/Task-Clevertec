@@ -3,6 +3,9 @@ package edu.clevertec.task.model;
 import edu.clevertec.task.model.parent.BaseModel;
 import jakarta.persistence.Entity;
 
+/**
+ * Модель скидочной карты
+ */
 @Entity
 public class DiscountCard extends BaseModel {
 

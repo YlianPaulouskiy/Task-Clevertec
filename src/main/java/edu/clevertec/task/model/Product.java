@@ -3,6 +3,9 @@ package edu.clevertec.task.model;
 import edu.clevertec.task.model.parent.BaseModel;
 import jakarta.persistence.Entity;
 
+/**
+ * Модель продукта
+ */
 @Entity
 public class Product extends BaseModel {
 
@@ -25,3 +28,4 @@ public class Product extends BaseModel {
         this.price = price;
     }
 }
+

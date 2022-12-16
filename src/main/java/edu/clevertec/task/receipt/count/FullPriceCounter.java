@@ -6,6 +6,9 @@ import edu.clevertec.task.repository.ProductRepository;
 
 import java.util.Map;
 
+/**
+ * Класс расчета полной стоимости без учета скидочной карты
+ */
 public class FullPriceCounter implements Counter {
 
     private final ProductRepository productRepository;
@@ -17,17 +20,16 @@ public class FullPriceCounter implements Counter {
     @Override
     public Double getCost(Map<Long, Integer> products) {
         double price = 0.0;
-        for (Long id: products.keySet()) {
+        for (Long id : products.keySet()) {
             if (productRepository.existsById(id)) {
                 Product product = productRepository.getReferenceById(id);
                 // скидка 10% на товары количество которых > 5
                 if (products.get(id) > 5) {
-                    price += product.getPrice()*0.1*products.get(id);
-                } else  {
-                    price += product.getPrice()*products.get(id);
+                    price += (product.getPrice() - product.getPrice() * 0.1) * products.get(id);
+                } else {
+                    price += product.getPrice() * products.get(id);
                 }
-            }
-            else {
+            } else {
                 throw new ProductNotFoundException("Product " + id + " not founded.");
             }
         }

@@ -4,6 +4,9 @@ import edu.clevertec.task.receipt.converter.Converter;
 import edu.clevertec.task.receipt.count.FullPriceCounter;
 import edu.clevertec.task.repository.ProductRepository;
 
+/**
+ * Класс который создает чек без скидочной карты
+ */
 public class ReceiptWithoutSale extends ReceiptBuilder {
 
     private final Converter converter;

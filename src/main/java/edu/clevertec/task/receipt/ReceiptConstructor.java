@@ -11,6 +11,9 @@ import edu.clevertec.task.repository.DiscountCardRepository;
 import edu.clevertec.task.repository.ProductRepository;
 import org.springframework.context.ConfigurableApplicationContext;
 
+/**
+ * Класс для реализации
+ */
 public class ReceiptConstructor {
 
     private final ConfigurableApplicationContext context;
@@ -29,6 +32,12 @@ public class ReceiptConstructor {
         System.out.println(receipt);
     }
 
+    /**
+     * Проверяет используется ли скидочная карта
+     *
+     * @param args входные аргументы
+     * @return bool
+     */
     private boolean isCard(String[] args) {
         boolean isCard = false;
         for (String arg : args) {
@@ -40,6 +49,13 @@ public class ReceiptConstructor {
         return isCard;
     }
 
+    /**
+     * В зависимости от того используется ли скидочная карта
+     * возвращает нужную реализацию чека
+     *
+     * @param isCard bool
+     * @return ReceiptBuilder
+     */
     private ReceiptBuilder getBuilder(boolean isCard) {
         return isCard
                 ? new ReceiptWithSale(context.getBean(ProductRepository.class), context.getBean(DiscountCardRepository.class))

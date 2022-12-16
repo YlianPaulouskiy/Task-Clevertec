@@ -2,6 +2,9 @@ package edu.clevertec.task.receipt.builder;
 
 import edu.clevertec.task.model.Receipt;
 
+/**
+ * Класс который определяет порядок создания чека
+ */
 public class Director {
 
     private final ReceiptBuilder builder;
@@ -10,6 +13,12 @@ public class Director {
         this.builder = builder;
     }
 
+    /**
+     * Создает чек
+     *
+     * @param args входные аргументы
+     * @return Receipt
+     */
     public Receipt buildReceipt(String[] args) {
         builder.createReceipt();
         builder.buildProducts(args);
@@ -18,5 +27,5 @@ public class Director {
         builder.buildTotalWithSale(args);
         return builder.getReceipt();
     }
-    
+
 }

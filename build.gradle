@@ -18,6 +18,8 @@ dependencies {
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     implementation group: 'org.postgresql', name: 'postgresql'
     implementation group: 'org.springframework.boot', name: 'spring-boot-starter-data-jpa'
+    implementation group: 'org.apache.commons', name: 'commons-math3', version: '3.6.1'
+
 }
 
 

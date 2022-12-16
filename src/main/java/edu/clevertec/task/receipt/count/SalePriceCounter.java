@@ -5,6 +5,9 @@ import edu.clevertec.task.repository.DiscountCardRepository;
 
 import java.util.Map;
 
+/**
+ * Класс для подсчета стоимости с учетом скидочной карты
+ */
 public class SalePriceCounter extends CounterDecorator {
 
     private final Integer cardNumber;
@@ -20,7 +23,8 @@ public class SalePriceCounter extends CounterDecorator {
     public Double getCost(Map<Long, Integer> products) {
         if (discountCardRepository.existsByNumber(cardNumber)) {
             double sale = discountCardRepository.findByNumber(cardNumber).getSale();
-            return super.getCost(products) - super.getCost(products)*sale/100;
+            //скидочная стоимость = полная - полная*скидку
+            return super.getCost(products) - super.getCost(products) * sale / 100;
         } else {
             throw new DiscountCardNotFoundException("Discount card " + cardNumber + " not founded.");
         }

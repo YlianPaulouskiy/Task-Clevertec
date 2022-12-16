@@ -9,6 +9,10 @@ import edu.clevertec.task.repository.ProductRepository;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Класс для преобразования входных аргументов
+ * в нужные для расчетов элементы
+ */
 public class Converter {
 
     private final ProductRepository productRepository;
@@ -17,6 +21,12 @@ public class Converter {
         this.productRepository = productRepository;
     }
 
+    /**
+     * Метод для получения id товаров и их кол-ва
+     *
+     * @param args входные аргументы
+     * @return Карта(id, кол - во)
+     */
     public Map<Long, Integer> getProductIds(String[] args) {
         Map<Long, Integer> products = new HashMap<>();
         for (String element : args) {
@@ -30,15 +40,27 @@ public class Converter {
         return products;
     }
 
+    /**
+     * Метод возвращающий номер скидочной карты, если такая имеется
+     *
+     * @param args входные аргументы
+     * @return номер скидочной карты
+     */
     public Integer getDiscountCard(String[] args) {
         for (String element : args) {
             if (LineCheck.isCardSource(element)) { //находим элемент с дисконтной картой
-                return Integer.valueOf(element);
+                return Integer.valueOf(LineParsing.getRightPart(element));
             }
         }
         return null;
     }
 
+    /**
+     * Метод для получения Продуктов и их кол-ва
+     *
+     * @param args входные аргументы
+     * @return Карта(Product, кол - во)
+     */
     public Map<Product, Integer> getProducts(String[] args) {
         Map<Long, Integer> productsIds = getProductIds(args);
         Map<Product, Integer> products = new HashMap<>();

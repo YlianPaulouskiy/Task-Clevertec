@@ -1,3 +1,6 @@
+TRUNCATE  product;
+TRUNCATE discount_card;
+
 INSERT INTO product
 VALUES ( 1,'Bread', 1.5),
        (2, 'Loaf', 1.75),

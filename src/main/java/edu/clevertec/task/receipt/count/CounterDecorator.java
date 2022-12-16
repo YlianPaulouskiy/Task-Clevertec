@@ -2,6 +2,10 @@ package edu.clevertec.task.receipt.count;
 
 import java.util.Map;
 
+/**
+ * Класс для реализации интерфейса Counter и
+ * реализации паттерна Decorator
+ */
 public class CounterDecorator implements Counter {
 
     private final Counter counter;

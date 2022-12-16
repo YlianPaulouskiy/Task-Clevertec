@@ -6,6 +6,9 @@ import edu.clevertec.task.receipt.count.SalePriceCounter;
 import edu.clevertec.task.repository.DiscountCardRepository;
 import edu.clevertec.task.repository.ProductRepository;
 
+/**
+ * Класс который создает чек со скидочной картой
+ */
 public class ReceiptWithSale extends ReceiptBuilder {
 
     private final Converter converter;
