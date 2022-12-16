@@ -1,0 +1,4 @@
+Cash Receipt
+Date:2022-12-16T12:38:59.972479400Time:2022-12-16T12:38:59.972479400QTY	Description	Price	Sale Price	Total
+--------------------------------------------------
+TOTAL:			0.0

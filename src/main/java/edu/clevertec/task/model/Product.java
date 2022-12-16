@@ -1,16 +1,12 @@
 package edu.clevertec.task.model;
 
 import edu.clevertec.task.model.parent.BaseModel;
-import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 
 @Entity
 public class Product extends BaseModel {
 
-    @Column(nullable = false)
     private String name;
-
-    @Column(nullable = false)
     private Double price;
 
     public String getName() {

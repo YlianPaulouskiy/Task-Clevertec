@@ -1,16 +1,12 @@
 package edu.clevertec.task.model;
 
 import edu.clevertec.task.model.parent.BaseModel;
-import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 
 @Entity
 public class DiscountCard extends BaseModel {
 
-    @Column(nullable = false, unique = true)
     private Integer number;
-
-    @Column(nullable = false)
     private Integer sale;
 
     public Integer getNumber() {

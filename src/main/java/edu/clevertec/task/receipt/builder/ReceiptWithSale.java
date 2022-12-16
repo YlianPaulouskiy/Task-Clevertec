@@ -5,18 +5,15 @@ import edu.clevertec.task.receipt.count.FullPriceCounter;
 import edu.clevertec.task.receipt.count.SalePriceCounter;
 import edu.clevertec.task.repository.DiscountCardRepository;
 import edu.clevertec.task.repository.ProductRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 
 public class ReceiptWithSale extends ReceiptBuilder {
 
     private final Converter converter;
     private final FullPriceCounter fullPriceCounter;
-    @Autowired
-    private DiscountCardRepository cardRepository;
-    @Autowired
-    private ProductRepository productRepository;
+    private final DiscountCardRepository cardRepository;
 
-    public ReceiptWithSale() {
+    public ReceiptWithSale(ProductRepository productRepository, DiscountCardRepository cardRepository) {
+        this.cardRepository = cardRepository;
         converter = new Converter(productRepository);
         fullPriceCounter = new FullPriceCounter(productRepository);
     }

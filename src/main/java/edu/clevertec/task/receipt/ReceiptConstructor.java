@@ -7,8 +7,17 @@ import edu.clevertec.task.receipt.builder.ReceiptWithSale;
 import edu.clevertec.task.receipt.builder.ReceiptWithoutSale;
 import edu.clevertec.task.receipt.lines.LineCheck;
 import edu.clevertec.task.receipt.writer.ReceiptWriter;
+import edu.clevertec.task.repository.DiscountCardRepository;
+import edu.clevertec.task.repository.ProductRepository;
+import org.springframework.context.ConfigurableApplicationContext;
 
 public class ReceiptConstructor {
+
+    private final ConfigurableApplicationContext context;
+
+    public ReceiptConstructor(ConfigurableApplicationContext context) {
+        this.context = context;
+    }
 
     public void start(String[] args) {
         Director director = new Director(getBuilder(isCard(args)));
@@ -33,8 +42,8 @@ public class ReceiptConstructor {
 
     private ReceiptBuilder getBuilder(boolean isCard) {
         return isCard
-                ? new ReceiptWithSale()
-                : new ReceiptWithoutSale();
+                ? new ReceiptWithSale(context.getBean(ProductRepository.class), context.getBean(DiscountCardRepository.class))
+                : new ReceiptWithoutSale(context.getBean(ProductRepository.class));
     }
 
 }
