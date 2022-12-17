@@ -1,5 +1,6 @@
 package edu.clevertec.task.receipt.count;
 
+import java.util.List;
 import java.util.Map;
 
 /**

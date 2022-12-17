@@ -1,6 +1,7 @@
 package edu.clevertec.task.receipt.converter;
 
 import edu.clevertec.task.model.Product;
+import edu.clevertec.task.receipt.exception.IncorrectInputSourceException;
 import edu.clevertec.task.receipt.exception.ProductNotFoundException;
 import edu.clevertec.task.receipt.lines.LineCheck;
 import edu.clevertec.task.receipt.lines.LineParsing;
@@ -75,6 +76,20 @@ public class Converter {
             }
         }
         return products;
+    }
+
+    /**
+     * Преобразует строку в аргументы (товар-кол-во и карта-номер)
+     *
+     * @param source Аргументы, передающиеся в виде строки
+     * @return массив аргументов
+     */
+    public String[] getArgs(String source) {
+        if (LineCheck.isCorrectSource(source)) {
+            return LineParsing.parse(source);
+        } else {
+            throw new IncorrectInputSourceException();
+        }
     }
 
 }

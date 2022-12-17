@@ -2,10 +2,12 @@ package edu.clevertec.task.repository;
 
 import edu.clevertec.task.model.DiscountCard;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
 /**
  * Интерфейс для выполнения запросов к таблице discount_card
  */
+@Repository
 public interface DiscountCardRepository extends JpaRepository<DiscountCard, Long> {
 
     /**

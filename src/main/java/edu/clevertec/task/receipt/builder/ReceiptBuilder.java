@@ -2,6 +2,8 @@ package edu.clevertec.task.receipt.builder;
 
 import edu.clevertec.task.model.Receipt;
 
+import java.time.LocalDateTime;
+
 /**
  * Класс-строитель для создания разных экземпляров класса Receipt
  */
@@ -14,6 +16,10 @@ public abstract class ReceiptBuilder {
      */
     public void createReceipt() {
         receipt = new Receipt();
+    }
+
+    public void buildMarket() {
+        receipt.setMarket("Super My Market");
     }
 
     /**
@@ -43,6 +49,20 @@ public abstract class ReceiptBuilder {
      * @param args входные аргументы
      */
     abstract void buildTotalWithSale(String[] args);
+
+    /**
+     * Устанавливает дату создания чека
+     */
+    public void buildDate() {
+        receipt.setDate(LocalDateTime.now().toString().substring(0, 10));
+    }
+
+    /**
+     * Устанавливает время создания чека
+     */
+    public void buildTime() {
+        receipt.setTime(LocalDateTime.now().toString().substring(11,19));
+    }
 
     /**
      * Возвращает полученный чек

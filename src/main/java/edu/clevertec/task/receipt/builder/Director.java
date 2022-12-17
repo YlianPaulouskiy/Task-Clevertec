@@ -21,10 +21,13 @@ public class Director {
      */
     public Receipt buildReceipt(String[] args) {
         builder.createReceipt();
+        builder.buildMarket();
         builder.buildProducts(args);
         builder.buildSale(args);
         builder.buildTotal(args);
         builder.buildTotalWithSale(args);
+        builder.buildDate();
+        builder.buildTime();
         return builder.getReceipt();
     }
 
