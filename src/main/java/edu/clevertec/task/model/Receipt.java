@@ -78,7 +78,7 @@ public class Receipt {
     public String toString() {
         StringBuilder receipt = new StringBuilder();
 
-        receipt.append("\n\nCash Receipt\n")
+        receipt.append("Cash Receipt\n")
                 .append("Date:").append(LocalDateTime.now().toString(), 0, 10)
                 .append("\nTime:").append(LocalDateTime.now().toString(), 11, 19)
                 .append("\nQTY\t").append("Description\t").append("Price\t").append("Sale Price\t").append("Total\n");

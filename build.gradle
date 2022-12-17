@@ -14,16 +14,16 @@ repositories {
 
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter'
+    //  TEST
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    //  DATABASE
     implementation group: 'org.postgresql', name: 'postgresql'
     implementation group: 'org.springframework.boot', name: 'spring-boot-starter-data-jpa'
-    implementation group: 'org.apache.commons', name: 'commons-math3', version: '3.6.1'
+    //  WEB
     implementation group: 'org.springframework.boot', name: 'spring-boot-starter-web'
-//    implementation group: 'org.thymeleaf', name: 'thymeleaf-spring5', version: '3.0.11.RELEASE'
     implementation group: 'org.springframework.boot', name: 'spring-boot-starter-thymeleaf', version: '3.0.0'
-
-
-
+    //  another
+    implementation group: 'org.apache.commons', name: 'commons-math3', version: '3.6.1'
 
 }
 

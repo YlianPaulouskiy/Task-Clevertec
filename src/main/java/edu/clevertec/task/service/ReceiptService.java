@@ -12,6 +12,9 @@ import edu.clevertec.task.repository.DiscountCardRepository;
 import edu.clevertec.task.repository.ProductRepository;
 import org.springframework.stereotype.Service;
 
+/**
+ * Основная логика получения чека
+ */
 @Service
 public class ReceiptService {
 

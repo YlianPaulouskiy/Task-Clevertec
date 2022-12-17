@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en" xmlns: th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Check</title>
+
+    <style>
+        .round {
+            max-width: 1px;
+            overflow: hidden;
+        }
+    </style>
+</head>
+
+
+<body>
+
+<table border="1">
+    <!--                голова таблицы-->
+    <thead>
+    <!--    1 строка-->
+    <tr>
+        <th scope="col">
+            <h2>CASH RECEIPT</h2>
+        </th>
+    </tr>
+    <!--    2 строка-->
+    <tr>
+        <td>
+            <h3>
+                <center th:text="${receipt.getMarket()}">market</center>
+            </h3>
+        </td>
+    </tr>
+    <!--    3 строка-->
+    <tr>
+        <td>Date:
+            <a th:text="${receipt.getDate()}">date</a>
+        </td>
+    </tr>
+    <!--    4 строка-->
+    <tr>
+        <td>Time:
+            <a th:text="${receipt.getTime()}">time</a>
+        </td>
+    </tr>
+    <!--    5 строка-->
+    <tr>
+        <td>
+            <table border="1">
+                <thead>
+                <tr>
+                    <th scope="col">QTY</th>
+                    <th scope="col">Description</th>
+                    <th scope="col">Price</th>
+                    <th scope="col">Sale Price</th>
+                    <th scope="col">Total</th>
+                </tr>
+                </thead>
+                <tbody>
+
+                <tr th:each="product: ${receipt.getProducts().keySet()}">
+                    <!--                    AMOUNT-->
+                    <td>
+                        <center th:text="${receipt.getProducts().get(product)}">qty</center>
+                    </td>
+                    <!--                    DESCRIPTION-->
+                    <td>
+                        <center th:text="${product.getName()}">name</center>
+                    </td>
+                    <!--                    PRICE-->
+                    <td>
+                        <center th:text="${product.getPrice()}">price</center>
+                    </td>
+
+                    <!--                    SALE PRICE-->
+
+                    <td class="round" th:if="${receipt.getProducts().get(product)}>5">
+                        <center th:text="${product.getPrice()} - ${product.getPrice()} * 0.1">salePrice</center>
+                    </td>
+                    <td th:if="${receipt.getProducts().get(product)}<5">
+                        <center>-</center>
+                    </td>
+
+                    <!--                    TOTAL SALE PRICE-->
+                    <td class="round" th:if="${receipt.getProducts().get(product)}>5">
+                        <center th:text="(${product.getPrice()} - ${product.getPrice()} * 0.1) * ${receipt.getProducts().get(product)}">
+                            totalSalePrice
+                        </center>
+                    </td>
+
+                    <!--                    TOTAL PRICE WITHOUT SALE-->
+                    <td class="round" th:if="${receipt.getProducts().get(product)}<5">
+                        <center th:text="${product.getPrice()} * ${receipt.getProducts().get(product)}">
+                            total
+                        </center>
+                    </td>
+
+                </tr>
+                </tbody>
+            </table>
+        </td>
+    </tr>
+
+    <!--    6 строка-->
+    <!--    TOTAL WITH SALE CARD-->
+    <div th:if="${receipt.getSale()}!=null">
+        <td>
+            <h4>Full price:
+                <a th:text="${receipt.getTotal()}">Full price</a>
+                $
+            </h4>
+        </td>
+        <tr>
+            <td>
+                <h4>Card Sale:
+                    <a th:text="${receipt.getSale()}">card Sale</a>
+                    $
+                </h4>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <h3>TOTAL:
+                    <a th:text="${receipt.getTotalWithSale()}">TOTAL</a>
+                    $
+                </h3>
+            </td>
+        </tr>
+    </div>
+    <!--    TOTAL RESULT-->
+    <div th:if="${receipt.getSale()}==null">
+        <tr>
+            <td>
+                <h3>TOTAL
+                    <a th:text="${receipt.getTotal()}">TOTAL</a>
+                    $
+                </h3>
+            </td>
+        </tr>
+    </div>
+    </thead>
+    <!--                тело таблицы-->
+</table>
+</body>
+
+</html>

@@ -14,7 +14,7 @@ public class LineCheck {
      * @return bool
      */
     public static boolean isCorrectSource(String source) {
-        Pattern pattern = Pattern.compile("(\\d-\\d\\s*)+(card-\\d{4})?");
+        Pattern pattern = Pattern.compile("(\\d+-\\d+\\s*)+(card-\\d{4})?");
         return pattern.matcher(source.trim()).matches();
     }
 
