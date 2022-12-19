@@ -9,7 +9,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import java.io.*;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.setMaxLengthForSingleLineDescription;
 
 @SpringBootTest
 class ReceiptWriterTest {

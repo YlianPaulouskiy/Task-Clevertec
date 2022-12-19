@@ -6,6 +6,7 @@ import edu.clevertec.task.receipt.exception.ProductNotFoundException;
 import edu.clevertec.task.receipt.lines.LineCheck;
 import edu.clevertec.task.receipt.lines.LineParsing;
 import edu.clevertec.task.repository.ProductRepository;
+import org.springframework.stereotype.Component;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -14,6 +15,7 @@ import java.util.Map;
  * Класс для преобразования входных аргументов
  * в нужные для расчетов элементы
  */
+@Component
 public class Converter {
 
     private final ProductRepository productRepository;
