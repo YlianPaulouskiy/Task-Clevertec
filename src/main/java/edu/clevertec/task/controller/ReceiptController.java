@@ -1,8 +1,7 @@
 package edu.clevertec.task.controller;
 
-
 import edu.clevertec.task.service.ReceiptService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,19 +12,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
  * Работа с view, передача информации на фронт
  */
 @Controller
+@AllArgsConstructor
 @RequestMapping("/check")
 public class ReceiptController {
 
-    @Autowired
-    private ReceiptService receiptService;
-
-    public ReceiptController() {
-    }
-//
-//    public ReceiptController(ReceiptService receiptService) {
-//        this.receiptService = receiptService;
-//
-//    }
+    private final ReceiptService receiptService;
 
     /**
      * Получает входную строку и прокидывает полученную модель на фронт

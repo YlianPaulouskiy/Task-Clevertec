@@ -1,5 +1,8 @@
 package edu.clevertec.task.model;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import java.time.LocalDateTime;
 import java.util.Map;
 
@@ -8,6 +11,8 @@ import static org.apache.commons.math3.util.Precision.round;
 /**
  * Модель чека
  */
+@Getter
+@Setter
 public class Receipt {
 
     private String market;
@@ -17,62 +22,6 @@ public class Receipt {
     private Double totalWithSale;
     private String date;
     private String time;
-
-    public String getMarket() {
-        return market;
-    }
-
-    public void setMarket(String market) {
-        this.market = market;
-    }
-
-    public Map<Product, Integer> getProducts() {
-        return products;
-    }
-
-    public void setProducts(Map<Product, Integer> products) {
-        this.products = products;
-    }
-
-    public Double getSale() {
-        return sale;
-    }
-
-    public void setSale(Double sale) {
-        this.sale = sale;
-    }
-
-    public Double getTotal() {
-        return total;
-    }
-
-    public void setTotal(Double total) {
-        this.total = total;
-    }
-
-    public Double getTotalWithSale() {
-        return totalWithSale;
-    }
-
-    public void setTotalWithSale(Double totalWithSale) {
-        this.totalWithSale = totalWithSale;
-    }
-
-    public String getDate() {
-        return date;
-    }
-
-    public void setDate(String date) {
-        this.date = date;
-    }
-
-    public String getTime() {
-        return time;
-    }
-
-    public void setTime(String time) {
-        this.time = time;
-    }
 
     @Override
     public String toString() {

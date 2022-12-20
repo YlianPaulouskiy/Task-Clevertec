@@ -10,21 +10,18 @@ import edu.clevertec.task.receipt.lines.LineCheck;
 import edu.clevertec.task.receipt.writer.ReceiptWriter;
 import edu.clevertec.task.repository.DiscountCardRepository;
 import edu.clevertec.task.repository.ProductRepository;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 /**
  * Основная логика получения чека
  */
 @Service
+@AllArgsConstructor
 public class ReceiptService {
 
     private final ProductRepository productRepository;
     private final DiscountCardRepository cardRepository;
-
-    public ReceiptService(ProductRepository productRepository, DiscountCardRepository cardRepository) {
-        this.productRepository = productRepository;
-        this.cardRepository = cardRepository;
-    }
 
     /**
      * Создаем чек с нужными для нас полями

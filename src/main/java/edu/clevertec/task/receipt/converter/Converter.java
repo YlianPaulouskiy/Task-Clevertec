@@ -6,6 +6,7 @@ import edu.clevertec.task.receipt.exception.ProductNotFoundException;
 import edu.clevertec.task.receipt.lines.LineCheck;
 import edu.clevertec.task.receipt.lines.LineParsing;
 import edu.clevertec.task.repository.ProductRepository;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import java.util.HashMap;
@@ -16,13 +17,10 @@ import java.util.Map;
  * в нужные для расчетов элементы
  */
 @Component
+@AllArgsConstructor
 public class Converter {
 
     private final ProductRepository productRepository;
-
-    public Converter(ProductRepository productRepository) {
-        this.productRepository = productRepository;
-    }
 
     /**
      * Метод для получения id товаров и их кол-ва

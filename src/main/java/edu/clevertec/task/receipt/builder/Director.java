@@ -1,17 +1,15 @@
 package edu.clevertec.task.receipt.builder;
 
 import edu.clevertec.task.model.Receipt;
+import lombok.AllArgsConstructor;
 
 /**
  * Класс который определяет порядок создания чека
  */
+@AllArgsConstructor
 public class Director {
 
     private final ReceiptBuilder builder;
-
-    public Director(ReceiptBuilder builder) {
-        this.builder = builder;
-    }
 
     /**
      * Создает чек

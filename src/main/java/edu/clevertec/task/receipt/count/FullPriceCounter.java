@@ -3,6 +3,8 @@ package edu.clevertec.task.receipt.count;
 import edu.clevertec.task.receipt.exception.ProductNotFoundException;
 import edu.clevertec.task.model.Product;
 import edu.clevertec.task.repository.ProductRepository;
+import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.Map;
@@ -11,13 +13,10 @@ import java.util.Map;
  * Класс расчета полной стоимости без учета скидочной карты
  */
 @Component
+@AllArgsConstructor
 public class FullPriceCounter implements Counter {
 
     private final ProductRepository productRepository;
-
-    public FullPriceCounter(ProductRepository productRepository) {
-        this.productRepository = productRepository;
-    }
 
     @Override
     public Double getCost(Map<Long, Integer> products) {

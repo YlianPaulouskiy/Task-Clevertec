@@ -78,7 +78,7 @@
                     <td class="round" th:if="${receipt.getProducts().get(product)}>5">
                         <center th:text="${product.getPrice()} - ${product.getPrice()} * 0.1">salePrice</center>
                     </td>
-                    <td th:if="${receipt.getProducts().get(product)}<5">
+                    <td th:if="${receipt.getProducts().get(product)}<=5">
                         <center>-</center>
                     </td>
 
@@ -90,7 +90,7 @@
                     </td>
 
                     <!--                    TOTAL PRICE WITHOUT SALE-->
-                    <td class="round" th:if="${receipt.getProducts().get(product)}<5">
+                    <td class="round" th:if="${receipt.getProducts().get(product)}<=5">
                         <center th:text="${product.getPrice()} * ${receipt.getProducts().get(product)}">
                             total
                         </center>

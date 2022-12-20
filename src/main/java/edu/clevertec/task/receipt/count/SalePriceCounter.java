@@ -1,7 +1,8 @@
 package edu.clevertec.task.receipt.count;
 
 import edu.clevertec.task.receipt.exception.DiscountCardNotFoundException;
-import edu.clevertec.task.repository.DiscountCardRepository;;
+import edu.clevertec.task.repository.DiscountCardRepository;
+import lombok.AllArgsConstructor;;
 
 import java.util.Map;
 
