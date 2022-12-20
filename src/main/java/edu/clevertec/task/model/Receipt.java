@@ -79,8 +79,9 @@ public class Receipt {
         StringBuilder receipt = new StringBuilder();
 
         receipt.append("Cash Receipt\n")
-                .append("Date:").append(LocalDateTime.now().toString(), 0, 10)
-                .append("\nTime:").append(LocalDateTime.now().toString(), 11, 19)
+                .append("\n Market: ").append(market)
+                .append("Date: ").append(LocalDateTime.now().toString(), 0, 10)
+                .append("\nTime: ").append(LocalDateTime.now().toString(), 11, 19)
                 .append("\nQTY\t").append("Description\t").append("Price\t").append("Sale Price\t").append("Total\n");
         for (Product product : products.keySet()) {
             double salePrice = products.get(product) > 5
