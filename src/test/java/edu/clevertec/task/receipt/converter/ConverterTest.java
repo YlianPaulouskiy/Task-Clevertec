@@ -2,6 +2,7 @@ package edu.clevertec.task.receipt.converter;
 
 import edu.clevertec.task.model.Product;
 import edu.clevertec.task.receipt.exception.IncorrectInputSourceException;
+import edu.clevertec.task.receipt.exception.ProductNotFoundException;
 import edu.clevertec.task.repository.ProductRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -58,6 +59,13 @@ class ConverterTest {
         when(productRepository.existsById(anyLong())).thenReturn(true);
         when(productRepository.getReferenceById(anyLong())).thenReturn(product);
         assertThat(converter.getProducts(args).size()).isNotEqualTo(0);
+        //проверка исключения
+        when(productRepository.existsById(anyLong())).thenReturn(false);
+        Throwable throwable = catchThrowable(() -> {
+            converter.getProducts(args);
+        });
+        assertThat(throwable).isInstanceOf(ProductNotFoundException.class);
+        assertThat(throwable.getMessage()).isNotBlank();
     }
 
     @Test
