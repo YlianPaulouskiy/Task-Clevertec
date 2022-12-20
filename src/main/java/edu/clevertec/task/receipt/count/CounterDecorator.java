@@ -1,11 +1,14 @@
 package edu.clevertec.task.receipt.count;
 
+import org.springframework.stereotype.Component;
+
 import java.util.Map;
 
 /**
  * Класс для реализации интерфейса Counter и
  * реализации паттерна Decorator
  */
+@Component
 public class CounterDecorator implements Counter {
 
     private final Counter counter;
