@@ -3,9 +3,11 @@ package edu.clevertec.task.receipt.converter;
 import edu.clevertec.task.model.Product;
 import edu.clevertec.task.receipt.exception.IncorrectInputSourceException;
 import edu.clevertec.task.receipt.exception.ProductNotFoundException;
+import edu.clevertec.task.receipt.lines.LineCheck;
 import edu.clevertec.task.repository.ProductRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.ArgumentMatchers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -26,17 +28,26 @@ class ConverterTest {
     private String sourceWithoutCard;
     private String exceptionSource;
     private String[] args;
-    private Product product;
-
-
 
     @BeforeEach
     void setUp() {
         sourceWithCard = "4-1 5-2 3-6 card-1111";
         sourceWithoutCard = "4-1 5-2 3-6";
-        args = new String[] {"4-1", "5-2", "3-6", "card-1111"};
         exceptionSource = "";
-        product = new Product();
+        args = new String[] {"4-1", "5-2", "3-6", "card-1111"};
+
+        Product product1 = new Product();
+        product1.setId(1L);
+        product1.setPrice(10.0);
+        Product product2 = new Product();
+        product2.setId(2L);
+        product2.setPrice(5.0);
+        Product product3 = new Product();
+        product3.setId(3L);
+        product3.setPrice(1.0);
+
+        when(productRepository.existsById(anyLong())).thenReturn(true);
+        when(productRepository.getReferenceById(anyLong())).thenReturn(product1, product2, product3);
     }
 
     @Test
@@ -56,9 +67,7 @@ class ConverterTest {
 
     @Test
     void getProducts() {
-        when(productRepository.existsById(anyLong())).thenReturn(true);
-        when(productRepository.getReferenceById(anyLong())).thenReturn(product);
-        assertThat(converter.getProducts(args).size()).isNotEqualTo(0);
+        assertThat(converter.getProducts(args).size()).isEqualTo(3);
         //проверка исключения
         when(productRepository.existsById(anyLong())).thenReturn(false);
         Throwable throwable = catchThrowable(() -> {

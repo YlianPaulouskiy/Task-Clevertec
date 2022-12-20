@@ -1,12 +1,13 @@
 package edu.clevertec.task.receipt.count;
 
+import edu.clevertec.task.model.DiscountCard;
 import edu.clevertec.task.model.Product;
-import edu.clevertec.task.receipt.exception.ProductNotFoundException;
+import edu.clevertec.task.receipt.exception.DiscountCardNotFoundException;
+import edu.clevertec.task.repository.DiscountCardRepository;
 import edu.clevertec.task.repository.ProductRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.mock.mockito.MockBean;
 
 import java.util.HashMap;
@@ -14,14 +15,18 @@ import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.catchThrowable;
-import static org.mockito.ArgumentMatchers.anyLong;
+import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.Mockito.when;
 
 @SpringBootTest
-class FullPriceCounterTest {
+class SalePriceCounterTest {
 
-    @Autowired
+    private SalePriceCounter salePriceCounter;
+
+    @MockBean
     private FullPriceCounter fullPriceCounter;
+    @MockBean
+    private DiscountCardRepository cardRepository;
     @MockBean
     private ProductRepository productRepository;
 
@@ -39,23 +44,30 @@ class FullPriceCounterTest {
         product3.setId(3L);
         product3.setPrice(1.0);
 
+        DiscountCard discountCard = new DiscountCard();
+        discountCard.setNumber(1111);
+        discountCard.setSale(10);
+
         products = new HashMap<>();
         products.put(product1.getId(), 3);
         products.put(product2.getId(), 4);
         products.put(product3.getId(), 10);
 
-        when(productRepository.existsById(anyLong())).thenReturn(true);
-        when(productRepository.getReferenceById(anyLong())).thenReturn(product1, product2, product3);
+        salePriceCounter = new SalePriceCounter(fullPriceCounter, 1111, cardRepository);
+        when(cardRepository.findByNumber(anyInt())).thenReturn(discountCard);
+        when(cardRepository.existsByNumber(anyInt())).thenReturn(true);
+        //fullCost
+        when(fullPriceCounter.getCost(anyMap())).thenReturn(59.0);
     }
 
     @Test
     void getCost() {
-        assertThat(fullPriceCounter.getCost(products)).isEqualTo(59.0);
-        when(productRepository.existsById(anyLong())).thenReturn(false);
+        assertThat(salePriceCounter.getCost(products)).isEqualTo(53.1);
+        when(cardRepository.existsByNumber(anyInt())).thenReturn(false);
         Throwable throwable = catchThrowable(() -> {
-            fullPriceCounter.getCost(products);
+            salePriceCounter.getCost(products);
         });
-        assertThat(throwable).isInstanceOf(ProductNotFoundException.class);
+        assertThat(throwable).isInstanceOf(DiscountCardNotFoundException.class);
         assertThat(throwable.getMessage()).isNotBlank();
     }
 }

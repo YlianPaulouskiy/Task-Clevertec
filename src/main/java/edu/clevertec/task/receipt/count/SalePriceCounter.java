@@ -29,4 +29,9 @@ public class SalePriceCounter extends CounterDecorator {
             throw new DiscountCardNotFoundException("Discount card " + cardNumber + " not founded.");
         }
     }
+
+    public Integer getCardNumber() {
+        return cardNumber;
+    }
+
 }
